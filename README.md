@@ -12,7 +12,7 @@ You can use it to click on a given desktop position 1,000 times per second if yo
 ## TODO
 
 -   [x] Persistent settings [#1][issue-1]
--   [ ] Add tooltips explanations for each field [#2][issue-2]
+-   [x] Add tooltips explanations for each field [#2][issue-2]
 -   [ ] Make hotkeys configurable [#3][issue-3]
 
 ## Installation
