@@ -12,10 +12,10 @@ namespace Clickami
         [DllImport("user32.dll")]
         private static extern bool UnregisterHotKey(IntPtr hWnd, int id);
 
-        private int modifier;
-        private int key;
+        private readonly int modifier;
+        private readonly int key;
         private IntPtr hWnd;
-        private int id;
+        private readonly int id;
 
         public static class Constants
         {

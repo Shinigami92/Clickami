@@ -141,7 +141,7 @@ namespace Clickami
             InitializeComponent();
         }
 
-        private void btnStartStop_Click(object sender, RoutedEventArgs e)
+        private void BtnStartStop_Click(object sender, RoutedEventArgs e)
         {
             this.mouseCoordinates.X = this.iudMouseX.Value.Value;
             this.mouseCoordinates.Y = this.iudMouseY.Value.Value;
@@ -198,7 +198,7 @@ namespace Clickami
             }
         }
 
-        private void cbTopmost_Click(object sender, RoutedEventArgs e)
+        private void CbTopmost_Click(object sender, RoutedEventArgs e)
         {
             this.Topmost = this.cbTopmost.IsChecked == true;
         }
@@ -272,8 +272,10 @@ namespace Clickami
             this.timerForInfinitely = new Timer();
             this.timerForInfinitely.Elapsed += new ElapsedEventHandler(TimerForInfinitely);
 
-            this.timerForUpdateUI = new DispatcherTimer();
-            this.timerForUpdateUI.Interval = TimeSpan.FromMilliseconds(50);
+            this.timerForUpdateUI = new DispatcherTimer
+            {
+                Interval = TimeSpan.FromMilliseconds(50)
+            };
             this.timerForUpdateUI.Tick += new EventHandler(TimerForUpdateUI);
             this.timerForUpdateUI.Start();
         }
