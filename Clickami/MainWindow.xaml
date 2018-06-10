@@ -9,17 +9,17 @@
         Title="Clickami" Height="195" Width="290" ResizeMode="CanMinimize" Topmost="True" Loaded="Window_Loaded" Closing="Window_Closing" ContentRendered="Window_ContentRendered">
     <Canvas>
         <Label Content="X" Canvas.Left="10" Canvas.Top="10"/>
-        <xctk:IntegerUpDown Name="iudMouseX" Value="0" Increment="1" Width="100" Canvas.Left="57" Canvas.Top="15"/>
+        <xctk:IntegerUpDown Name="iudMouseX" Value="0" Increment="1" Width="100" Canvas.Left="57" Canvas.Top="15" ToolTip="The X coordinate to be clicked on"/>
         <Label Content="Y" Canvas.Left="10" Canvas.Top="35"/>
-        <xctk:IntegerUpDown Name="iudMouseY" Value="0" Increment="1" Width="100" Canvas.Left="57" Canvas.Top="38"/>
+        <xctk:IntegerUpDown Name="iudMouseY" Value="0" Increment="1" Width="100" Canvas.Left="57" Canvas.Top="38" ToolTip="The Y coordinate to be clicked on"/>
         <Label Content="Delay" Canvas.Left="10" Canvas.Top="60"/>
-        <xctk:DoubleUpDown Name="dudDelay" Value="0.5" FormatString="F3" Increment="0.005" Minimum="0.001" Width="100" Canvas.Left="57" Canvas.Top="63"/>
+        <xctk:DoubleUpDown Name="dudDelay" Value="0.5" FormatString="F3" Increment="0.005" Minimum="0.001" Width="100" Canvas.Left="57" Canvas.Top="63" ToolTip="The delay between clicks"/>
         <Label Content="Sec" Canvas.Left="160" Canvas.Top="60"/>
         <Label Content="Loops" Canvas.Left="10" Canvas.Top="85"/>
-        <xctk:IntegerUpDown Name="iudLoops" Value="1" Increment="1" Minimum="1" Width="100" Canvas.Left="57" Canvas.Top="88"/>
-        <CheckBox Name="cbInfinitely" Content="Infinitely (ESC will break)" IsChecked="False" Canvas.Left="10" Canvas.Top="113"/>
-        <CheckBox Name="cbTopmost" Content="always on top" IsChecked="True" Click="CbTopmost_Click" Canvas.Left="162" Canvas.Top="16"/>
-        <Label Name="lblDurationLeft" Content="0,000 sec" HorizontalContentAlignment="Right" Width="107" Canvas.Left="157" Canvas.Top="85"/>
+        <xctk:IntegerUpDown Name="iudLoops" Value="1" Increment="1" Minimum="1" Width="100" Canvas.Left="57" Canvas.Top="88" ToolTip="How many times to click"/>
+        <CheckBox Name="cbInfinitely" Content="Infinitely (ESC will break)" IsChecked="False" Canvas.Left="10" Canvas.Top="113" ToolTip="Activate to click infinitely (can be stopped with ESC key)"/>
+        <CheckBox Name="cbTopmost" Content="always on top" IsChecked="True" Click="CbTopmost_Click" Canvas.Left="162" Canvas.Top="16" ToolTip="Activate so that the window is always in front of other windows"/>
+        <Label Name="lblDurationLeft" Content="0,000 sec" HorizontalContentAlignment="Right" Width="107" Canvas.Left="157" Canvas.Top="85" ToolTip="Here you can see how long it will still be clicked"/>
         <Button Name="btnStartStop" Content="Start (F1)" Click="BtnStartStop_Click" Width="100" Canvas.Left="164" Canvas.Top="110"/>
         <StatusBar Canvas.Bottom="0" Width="284" Height="22">
             <Grid Width="284" HorizontalAlignment="Center" VerticalAlignment="Center">
@@ -27,7 +27,7 @@
                     <ColumnDefinition Width="*"></ColumnDefinition>
                     <ColumnDefinition Width="*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
-                <Label Name="lblCursorPosition" Content="0,0" Padding="5,0,0,0"/>
+                <Label Name="lblCursorPosition" Content="0,0" Padding="5,0,0,0" ToolTip="Displays the current mouse pointer position"/>
                 <Label Content="made by Shinigami" HorizontalAlignment="Right" Grid.Column="1" Padding="0,0,13,0"/>
             </Grid>
         </StatusBar>
