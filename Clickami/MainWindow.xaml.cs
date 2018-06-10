@@ -116,7 +116,7 @@ namespace Clickami
                     LOG.Debug("this.cbInfinitely.IsChecked = " + this.cbInfinitely.IsChecked);
                     if (this.cbInfinitely.IsChecked == false)
                     {
-                        //Settings.loops = this.iudLoops.Value.Value;
+                        Settings.loops = this.iudLoops.Value.Value;
                         this.loops = this.iudLoops.Value.Value;
                         LOG.Debug("this.loops = " + this.loops);
                         this.timerForLoop.Interval = this.dudDelay.Value.Value * 1000.0;
@@ -183,7 +183,7 @@ namespace Clickami
                 }
                 if (this.cbInfinitely.IsChecked == false)
                 {
-                    //Settings.loops = this.iudLoops.Value.Value;
+                    Settings.loops = this.iudLoops.Value.Value;
                     this.loops = this.iudLoops.Value.Value;
                     this.timerForLoop.Interval = this.dudDelay.Value.Value * 1000.0;
                     this.timerForLoop.Start();
@@ -238,7 +238,7 @@ namespace Clickami
                 {
                     LOG.Warn("ghk_abortClick already unregistered!");
                 }
-                //this.loops = Settings.loops;
+                this.loops = Settings.loops;
                 this.isTimerForLoopRunning = false;
                 this.timerForLoop.Stop();
                 LOG.Info("Timer for loop has stopped.");
@@ -281,7 +281,7 @@ namespace Clickami
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             // Write settings.xml
-            //WriteSettings();
+            WriteSettings();
 
             this.ghk_abortClick.Unregister();
             this.ghk_startClick.Unregister();
@@ -297,32 +297,32 @@ namespace Clickami
             this.timerForUpdateUI.Stop();
         }
 
-        //private void ReadSettings()
-        //{
-        //    Settings.Read();
-        //    iudMouseX.Value = Settings.xCoord;
-        //    iudMouseY.Value = Settings.yCoord;
-        //    dudDelay.Value = Settings.delay;
-        //    iudLoops.Value = Settings.loops;
-        //    cbInfinitely.IsChecked = Settings.isInfinitely;
-        //    cbTopmost.IsChecked = Settings.isTopmost;
-        //}
+        private void ReadSettings()
+        {
+            Settings.Read();
+            iudMouseX.Value = Settings.xCoord;
+            iudMouseY.Value = Settings.yCoord;
+            dudDelay.Value = Settings.delay;
+            iudLoops.Value = Settings.loops;
+            cbInfinitely.IsChecked = Settings.isInfinitely;
+            cbTopmost.IsChecked = Settings.isTopmost;
+        }
 
-        //private void WriteSettings()
-        //{
-        //    Settings.xCoord = iudMouseX.Value.Value;
-        //    Settings.yCoord = iudMouseY.Value.Value;
-        //    Settings.delay = dudDelay.Value.Value;
-        //    Settings.loops = iudLoops.Value.Value;
-        //    Settings.isInfinitely = cbInfinitely.IsChecked.Value;
-        //    Settings.isTopmost = cbTopmost.IsChecked.Value;
-        //    Settings.Write();
-        //}
+        private void WriteSettings()
+        {
+            Settings.xCoord = iudMouseX.Value.Value;
+            Settings.yCoord = iudMouseY.Value.Value;
+            Settings.delay = dudDelay.Value.Value;
+            Settings.loops = iudLoops.Value.Value;
+            Settings.isInfinitely = cbInfinitely.IsChecked.Value;
+            Settings.isTopmost = cbTopmost.IsChecked.Value;
+            Settings.Write();
+        }
 
         private void Window_ContentRendered(object sender, EventArgs e)
         {
             // Read settings.xml if exists, otherwise use default values
-            //ReadSettings();
+            ReadSettings();
         }
     }
 }
