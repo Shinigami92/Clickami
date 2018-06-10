@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Diagnostics;
 using System.IO;
+using System.Reflection;
 using System.Windows;
 using System.Xml;
 using System.Xml.Linq;
@@ -11,7 +13,6 @@ namespace Clickami
         public static string PATHTODIRECTORY = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + "\\Clickami";
         public static string PATHTOSETTINGSXML = PATHTODIRECTORY + "\\settings.xml";
 
-        public const string VERSION = "1.0.0";
         public const string APPLICATIONNAME = "Clickami";
         public static int xCoord = 0;
         public static int yCoord = 0;
@@ -20,13 +21,20 @@ namespace Clickami
         public static bool isInfinitely = false;
         public static bool isTopmost = true;
 
+        internal static string GetVersion()
+        {
+            Assembly assembly = Assembly.GetExecutingAssembly();
+            FileVersionInfo fileVersionInfo = FileVersionInfo.GetVersionInfo(assembly.Location);
+            return fileVersionInfo.FileVersion;
+        }
+
         internal static void Read()
         {
             try
             {
                 XDocument settings = XDocument.Load(Settings.PATHTOSETTINGSXML);
                 XElement settingsElement = settings.Element("settings");
-                if (settingsElement.Attribute("version").Value == Settings.VERSION)
+                if (settingsElement.Attribute("version").Value == Settings.GetVersion())
                 {
                     try
                     {
@@ -68,7 +76,7 @@ namespace Clickami
         internal static void Write()
         {
             XAttribute applicationName = new XAttribute("applicationName", Settings.APPLICATIONNAME);
-            XAttribute version = new XAttribute("version", Settings.VERSION);
+            XAttribute version = new XAttribute("version", Settings.GetVersion());
             XAttribute x = new XAttribute("x", Settings.xCoord);
             XAttribute y = new XAttribute("y", Settings.yCoord);
             XElement coordinates = new XElement("coordinates", x, y);

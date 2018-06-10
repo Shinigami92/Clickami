@@ -18,9 +18,9 @@
         <Label Content="Loops" Canvas.Left="10" Canvas.Top="85"/>
         <xctk:IntegerUpDown Name="iudLoops" Value="1" Increment="1" Minimum="1" Width="100" Canvas.Left="57" Canvas.Top="88"/>
         <CheckBox Name="cbInfinitely" Content="Infinitely (ESC will break)" IsChecked="False" Canvas.Left="10" Canvas.Top="113"/>
-        <CheckBox Name="cbTopmost" Content="always on top" IsChecked="True" Click="cbTopmost_Click" Canvas.Left="162" Canvas.Top="16"/>
+        <CheckBox Name="cbTopmost" Content="always on top" IsChecked="True" Click="CbTopmost_Click" Canvas.Left="162" Canvas.Top="16"/>
         <Label Name="lblDurationLeft" Content="0,000 sec" HorizontalContentAlignment="Right" Width="107" Canvas.Left="157" Canvas.Top="85"/>
-        <Button Name="btnStartStop" Content="Start (F1)" Click="btnStartStop_Click" Width="100" Canvas.Left="164" Canvas.Top="110"/>
+        <Button Name="btnStartStop" Content="Start (F1)" Click="BtnStartStop_Click" Width="100" Canvas.Left="164" Canvas.Top="110"/>
         <StatusBar Canvas.Bottom="0" Width="284" Height="22">
             <Grid Width="284" HorizontalAlignment="Center" VerticalAlignment="Center">
                 <Grid.ColumnDefinitions>
