@@ -6,6 +6,8 @@ using System.Windows;
 using System.Xml;
 using System.Xml.Linq;
 
+#nullable enable
+
 namespace Clickami
 {
     internal class Settings

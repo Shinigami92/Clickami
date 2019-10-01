@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Runtime.InteropServices;
 
+#nullable enable
+
 namespace Clickami
 {
     internal class Hotkeys
@@ -14,7 +16,7 @@ namespace Clickami
 
         private readonly int modifier;
         private readonly int key;
-        private IntPtr hWnd;
+        private readonly IntPtr hWnd;
         private readonly int id;
 
         public static class Constants
@@ -38,19 +40,10 @@ namespace Clickami
             this.id = this.GetHashCode();
         }
 
-        public override int GetHashCode()
-        {
-            return modifier ^ key ^ hWnd.ToInt32();
-        }
+        public override int GetHashCode() => modifier ^ key ^ hWnd.ToInt32();
 
-        public bool Register()
-        {
-            return RegisterHotKey(hWnd, id, modifier, key);
-        }
+        public bool Register() => RegisterHotKey(hWnd, id, modifier, key);
 
-        public bool Unregister()
-        {
-            return UnregisterHotKey(hWnd, id);
-        }
+        public bool Unregister() => UnregisterHotKey(hWnd, id);
     }
 }

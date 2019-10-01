@@ -8,6 +8,8 @@ using System.Windows.Input;
 using System.Windows.Interop;
 using System.Windows.Threading;
 
+#nullable enable
+
 namespace Clickami
 {
     /// <summary>
@@ -51,7 +53,7 @@ namespace Clickami
         }
 
         [DllImport("user32.dll")]
-        public static extern void mouse_event(int dwFlags, int dx, int dy, int cButton, int dwExtraInfo);
+        static extern void mouse_event(uint dwFlags, int dx, int dy, uint dwData, int dwExtraInfo);
 
         public const int MOUSEEVENTF_LEFTDOWN = 0x02;
         public const int MOUSEEVENTF_LEFTUP = 0x04;
@@ -103,8 +105,8 @@ namespace Clickami
                 {
                     //MessageBox.Show("StartClick pressed!");
                     LOG.Debug("ghk_startClick pressed");
-                    this.mouseCoordinates.X = this.iudMouseX.Value.Value;
-                    this.mouseCoordinates.Y = this.iudMouseY.Value.Value;
+                    this.mouseCoordinates.X = this.iudMouseX.Value ?? 0;
+                    this.mouseCoordinates.Y = this.iudMouseY.Value ?? 0;
                     if (!this.ghk_startClick.Unregister())
                     {
                         LOG.Warn("ghk_startClick already unregistered!");
@@ -114,18 +116,19 @@ namespace Clickami
                         LOG.Warn("ghk_abortClick already registered!");
                     }
                     LOG.Debug("this.cbInfinitely.IsChecked = " + this.cbInfinitely.IsChecked);
+                    var delay = this.dudDelay.Value ?? 0.5;
                     if (this.cbInfinitely.IsChecked == false)
                     {
-                        Settings.loops = this.iudLoops.Value.Value;
-                        this.loops = this.iudLoops.Value.Value;
+                        Settings.loops = this.iudLoops.Value ?? 1;
+                        this.loops = this.iudLoops.Value ?? 1;
                         LOG.Debug("this.loops = " + this.loops);
-                        this.timerForLoop.Interval = this.dudDelay.Value.Value * 1000.0;
+                        this.timerForLoop.Interval = delay * 1000.0;
                         this.isTimerForLoopRunning = true;
                         this.timerForLoop.Start();
                     }
                     else
                     {
-                        this.timerForInfinitely.Interval = this.dudDelay.Value.Value * 1000.0;
+                        this.timerForInfinitely.Interval = delay * 1000.0;
                         this.isTimerForInfinitelyRunning = true;
                         this.timerForInfinitely.Start();
                     }
@@ -143,8 +146,8 @@ namespace Clickami
 
         private void BtnStartStop_Click(object sender, RoutedEventArgs e)
         {
-            this.mouseCoordinates.X = this.iudMouseX.Value.Value;
-            this.mouseCoordinates.Y = this.iudMouseY.Value.Value;
+            this.mouseCoordinates.X = this.iudMouseX.Value ?? 0;
+            this.mouseCoordinates.Y = this.iudMouseY.Value ?? 0;
             if (this.isTimerForLoopRunning)
             {
                 if (!this.ghk_startClick.Register())
@@ -181,18 +184,19 @@ namespace Clickami
                 {
                     LOG.Warn("ghk_abortClick already registered!");
                 }
+                var delay = this.dudDelay.Value ?? 0.5;
                 if (this.cbInfinitely.IsChecked == false)
                 {
-                    Settings.loops = this.iudLoops.Value.Value;
-                    this.loops = this.iudLoops.Value.Value;
-                    this.timerForLoop.Interval = this.dudDelay.Value.Value * 1000.0;
+                    Settings.loops = this.iudLoops.Value ?? 1;
+                    this.loops = this.iudLoops.Value ?? 1;
+                    this.timerForLoop.Interval = delay * 1000.0;
                     this.timerForLoop.Start();
                     LOG.Info("Timer for loop has started.");
                 }
                 else
                 {
                     this.isTimerForInfinitelyRunning = true;
-                    this.timerForInfinitely.Interval = this.dudDelay.Value.Value * 1000.0;
+                    this.timerForInfinitely.Interval = delay * 1000.0;
                     this.timerForInfinitely.Start();
                 }
             }
@@ -312,12 +316,12 @@ namespace Clickami
 
         private void WriteSettings()
         {
-            Settings.xCoord = iudMouseX.Value.Value;
-            Settings.yCoord = iudMouseY.Value.Value;
-            Settings.delay = dudDelay.Value.Value;
-            Settings.loops = iudLoops.Value.Value;
-            Settings.isInfinitely = cbInfinitely.IsChecked.Value;
-            Settings.isTopmost = cbTopmost.IsChecked.Value;
+            Settings.xCoord = iudMouseX.Value ?? 0;
+            Settings.yCoord = iudMouseY.Value ?? 0;
+            Settings.delay = dudDelay.Value ?? 0.5;
+            Settings.loops = iudLoops.Value ?? 1;
+            Settings.isInfinitely = cbInfinitely.IsChecked ?? false;
+            Settings.isTopmost = cbTopmost.IsChecked ?? true;
             Settings.Write();
         }
 
